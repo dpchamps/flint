@@ -1,5 +1,5 @@
 [package]
-name = "flint-os"
+name = "flint_os"
 version = "0.1.0"
 edition = "2021"
 authors = ['Dave Campion <me@davecampion.com>']
@@ -10,5 +10,5 @@ panic = "abort"
 [profile.release]
 panic = "abort"
 
-
 [dependencies]
+bootloader = { path = "../bootloader" }

@@ -3,5 +3,12 @@
 version = 4
 
 [[package]]
-name = "flint-os"
+name = "bootloader"
 version = "0.1.0"
+
+[[package]]
+name = "flint_os"
+version = "0.1.0"
+dependencies = [
+ "bootloader",
+]
