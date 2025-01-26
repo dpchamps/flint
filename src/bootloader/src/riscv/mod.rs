@@ -12,7 +12,7 @@ pub fn init() {
 
 #[no_mangle]
 unsafe fn setup_trap_vector() {
-    extern "C" {
-        fn trap_vector();
-    }
+    // extern "C" {
+    //     fn trap_vector();
+    // }
 }

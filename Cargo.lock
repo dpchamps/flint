@@ -7,7 +7,7 @@ name = "bootloader"
 version = "0.1.0"
 
 [[package]]
-name = "flint_os"
+name = "kernel"
 version = "0.1.0"
 dependencies = [
  "bootloader",

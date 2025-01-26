@@ -1,8 +1,3 @@
-# boot.S
-# bootloader for SoS
-# Stephen Marz
-# 8 February 2019
-
 # Disable generation of compressed instructions.
 .option norvc
 
@@ -60,7 +55,10 @@ _start:
 	# 1 << 3 : Machine's M-mode software interrupt-enable bit is 1 (MSIE=1).
 	# 1 << 7 : Machine's timer interrupt-enable bit is 1 (MTIE=1).
 	# 1 << 11: Machine's external interrupt-enable bit is 1 (MEIE=1).
-	li		t3, (1 << 3) | (1 << 7) | (1 << 11)
+	## TODO: Re-enable after properly handling trap vector
+	## li		t3, (1 << 3) | (1 << 7) | (1 << 11)
+	li		t3, (1 << 3) | (1 << 11)
+
 	csrw	mie, t3
 	# Set the return address to infinitely wait for interrupts.
 	la		ra, 4f

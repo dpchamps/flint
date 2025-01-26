@@ -1,0 +1,26 @@
+[package]
+name = "kernel"
+version = "0.1.0"
+edition = "2021"
+authors = ['Dave Campion <me@davecampion.com>']
+
+[profile.dev]
+panic = "abort"
+opt-level = 0
+lto = false
+
+[profile.release]
+panic = "abort"
+opt-level = 3
+lto = true
+codegen-units = 1
+
+[dependencies]
+bootloader = { path = "../bootloader" }
+
+[[bin]]
+name = "kernel"
+path = "src/main.rs"
+test = false
+doctest = false
+bench = false

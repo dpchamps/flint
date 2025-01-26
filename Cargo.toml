@@ -1,4 +1,3 @@
-edition = "2021"
-
 [workspace]
-members = [ "src/bootloader","src/flintos"]
+resolver = "2"
+members = [ "src/bootloader", "src/kernel"]
