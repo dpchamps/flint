@@ -45,6 +45,7 @@ _start:
 	# 1 << 3    : Machine's interrupt-enable bit is 1 (MIE=1).
 	li		t0, (0b11 << 11) | (1 << 7) | (1 << 3)
 	csrw	mstatus, t0
+
 	# Machine's exception program counter (MEPC) is set to `kmain`.
 	la		t1, kmain
 	csrw	mepc, t1

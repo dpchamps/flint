@@ -2,22 +2,21 @@
 #![no_main]
 
 use core::fmt::Write;
+use core::ops::Deref;
 use core::panic::PanicInfo;
+
 mod core_os;
+mod devices;
 mod drivers;
 
-use bootloader;
-
-use drivers::uart::Uart;
+use core_os::{critical_section, initialize_kernel};
+use devices::output::Output;
 
 #[no_mangle]
 pub extern "C" fn kmain() -> ! {
-    bootloader::init();
-    Uart::init(0x10_000_000);
-
-    let mut uart = Uart::create(0x10_000_000);
-    uart.write_str("Chufty Chufty Chufty!\n").expect("");
-
+    initialize_kernel();
+    write!(Output::writer(), "Hello!").expect("");
+    panic!("Uh oh spaghettio!");
     loop {
         unsafe { core::arch::asm!("wfi") }
     }
