@@ -3,9 +3,9 @@ build-std-features = ["compiler-builtins-mem"]
 build-std = ["core", "compiler_builtins", "alloc"]
 
 [build]
-target = "targets/riscv/riscv-flint-os.json"
+target = "targets/riscv/riscv64-flintos.json"
 
-[target."riscv-flint-os"]
+[target."riscv64-flintos"]
 rustflags = [
     "-C", "link-arg=-Tsrc/bootloader/src/riscv/linker.ld",
 ]

@@ -2,20 +2,22 @@
 #![no_main]
 extern crate alloc;
 
-use alloc::{boxed::Box, vec::Vec, string::String, format, vec};
+mod core_os;
+mod devices;
+mod drivers;
+mod wasmtime_bindings;
+
+use alloc::{boxed::Box, vec, vec::Vec};
 use alloc::string::ToString;
 use core::fmt::Write;
 use core::ops::Deref;
 use core::panic::PanicInfo;
-
-mod core_os;
-mod devices;
-mod drivers;
-
+use wasmtime::{Engine, Instance, Linker, Module, Store};
 use core_os::{critical_section, initialize_kernel};
 use talc::{Talck, ClaimOnOom, Talc, Span};
 
-static mut ARENA: [u8; 10000] = [0; 10000];
+
+static mut ARENA: [u8; 10_000] = [0; 10_000];
 #[global_allocator]
 static ALLOCATOR: Talck<spin::Mutex<()>, ClaimOnOom> = Talc::new(unsafe {
     ClaimOnOom::new(Span::from_array(core::ptr::addr_of!(ARENA).cast_mut()))
@@ -52,6 +54,9 @@ pub extern "C" fn kmain() -> ! {
     println!("Hello!");
     println!("Boxed: {}", boxed);
 	println!("Vector: {:?}", vec![1,2,3,4,5]);
+	let engine = Engine::default();
+	let module = unsafe { Module::deserialize(&engine, [0; 100]).expect("") };
+	let instance = Instance::new(&mut Store::new(&engine, ()), &module, &[]).expect("");
     // panic!("Uh oh spaghettio!");
     loop {
         unsafe {

@@ -1,4 +1,4 @@
-use core::arch::global_asm;
+use core::{arch::global_asm, include_str};
 
 global_asm!(include_str!("asm/entry.S"));
 global_asm!(include_str!("asm/trap.S"));

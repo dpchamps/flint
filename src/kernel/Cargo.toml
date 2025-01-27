@@ -22,6 +22,7 @@ once_cell = { version = "1.20.2", default-features = false, features = ["critica
 riscv = { version = "0.12.1", default-features = false, features = [] }
 spin = { version = "0.9.8", default-features = false, features = ["spin_mutex", "lock_api"] }
 talc = { version = "4.4.2" , features = ["allocator"] }
+wasmtime = { version = "29.0.1", default-features = false, features = ["runtime"]}
 
 [[bin]]
 name = "kernel"
