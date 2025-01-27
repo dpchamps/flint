@@ -5,6 +5,8 @@ use core::panic::PanicInfo;
 
 #[no_mangle]
 pub fn handle_panic(panic_info: &PanicInfo) -> ! {
+    // It would be good to dump registers here as well and output as much as possible
+    // about the state of the computer
     match Output::try_writer() {
         None => {}
         Some(mut writer) => write!(writer, "\n{}\n", panic_info).unwrap_or_else(|_| {}),
@@ -14,8 +16,7 @@ pub fn handle_panic(panic_info: &PanicInfo) -> ! {
         loop {
             // TODO: jank for now, but we probably want to do something like this:
             // wait for some time, then try to reboot
-            // It would be good to dump registers here as well and output as much as possible
-            // about the state of the computer
+
             for _ in 1..10000000 {
                 asm!("nop")
             }
